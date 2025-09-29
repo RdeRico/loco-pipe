@@ -54,7 +54,7 @@ rule index_bam:
     bai = "{bam}.bai"
   threads: 1
   conda:
-    "../envs/samtools.yaml"
+    "samtools_lcpipe"
   shell: "samtools index {input.bam}"
   
 # This rule extract the first column of the chromosome table to form a chromosome list. The resulting chromosome list is used to 

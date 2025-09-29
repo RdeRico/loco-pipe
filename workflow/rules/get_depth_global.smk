@@ -18,6 +18,7 @@ rule get_depth_global:
         expand("{{basedir}}/angsd/get_depth_global/{{chr}}.{ext}",
                ext = [ "arg", "depthGlobal", "depthSample", "pos.gz" ]),
         touch("{basedir}/angsd/get_depth_global/{chr}.done")
+    resources: mem_mb=29920
     threads: 
         config["get_depth_global"]["threads"]
     params:
@@ -26,7 +27,7 @@ rule get_depth_global:
         minmapq = config["get_depth_global"]["minmapq"],
         extra = config["get_depth_global"]["extra"]
     log: "{basedir}/angsd/get_depth_global/{chr}.log"
-    conda: "../envs/angsd.yaml"
+    conda: "angsd_lcpipe"
     shell:
         '''
         mkdir -p {params.outdir}

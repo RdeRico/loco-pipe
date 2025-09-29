@@ -18,7 +18,7 @@ rule get_fst:
         outbase = "{basedir}/angsd/get_fst/{population1}.{population2}.{chr}",
         extra = config["get_fst"]["extra"],
     log: "{basedir}/angsd/get_fst/{population1}.{population2}.{chr}.log"
-    conda: "../envs/angsd.yaml"
+    conda: "angsd_lcpipe"
     shell:
         '''
         mkdir -p {params.outdir}
@@ -39,7 +39,7 @@ rule plot_fst:
     output: 
         png = "{basedir}/figures/fst/{population1}.{population2}.png",
         done = touch("{basedir}/figures/fst/{population1}.{population2}.done"),
-    threads: 4
+    threads: 16
     params:
         rscript = config["global"]["scriptdir"] + "/plot_fst.R",
         snp_window_size = config["get_fst"]["snp_window_size"],
@@ -47,7 +47,7 @@ rule plot_fst:
         fig_height = config["get_fst"]["fig_height"],
         fig_width = config["get_fst"]["fig_width"],
     log: "{basedir}/figures/fst/{population1}.{population2}.log"
-    conda: "../envs/r.yaml"
+    conda: "r_lcpipe"
     shell:
         '''
         # module load r  

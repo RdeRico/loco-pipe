@@ -106,7 +106,8 @@ rule run_lostruct_global:
         k=config["lostruct"]["k"],
         indir="{basedir}/lostruct/global/summarize_pcangsd_for_lostruct",
         outdir="{basedir}/lostruct/global/run_lostruct",
-    threads: config["lostruct"]["threads"]
+    resources: mem_mb=256000
+    threads: 16
     log: "{basedir}/lostruct/global/run_lostruct/run_lostruct.log"
     conda:
         "lostruct_lcpipe"  ## lostruct isn't available on conda. we'll need to set up a conda environment with lostruct beforehand
@@ -170,7 +171,7 @@ rule run_pcangsd_with_lostruct_outliers_global:
         rm -f {params.outdir}/*
         cd  {params.indir}
         ## Iterate over each MDA axis
-        for FILE in `ls *.tsv`; do
+        for FILE in `ls *.mds_*.tsv`; do
         ## Assemble beagle files for each MDS axis
         PREFIX=${{FILE%%.tsv}}
         I=1
