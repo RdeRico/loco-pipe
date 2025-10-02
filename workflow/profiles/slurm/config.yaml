@@ -7,7 +7,7 @@ cluster-cancel: "scancel"
 max-jobs-per-second: 1
 max-status-checks-per-second: 10
 local-cores: 1
-latency-wait: 60
+latency-wait: 300
 
 # Additional settings used for our purposes
 use-conda: True
