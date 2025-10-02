@@ -2,7 +2,6 @@ __default__:
   time: "24:00:00"
   nodes: 1
   cpus-per-task: 4
-  #account: csu101_alpine1
   partition: amilan128c,amilan
   qos: normal
 
