@@ -1,8 +1,12 @@
 __default__:
-  time: 4320
+  time: "24:00:00"
   nodes: 1
   cpus-per-task: 4
-  account: co_genomicdata
-  partition: savio4_htc
-  qos: savio_lowprio
-  exclude: n0100.savio4
+  partition: amilan128c,amilan
+  qos: normal
+
+run_lostruct_global:
+  time: "12:00:00"
+  mem: "256G"
+  partition: amem
+  qos: mem
