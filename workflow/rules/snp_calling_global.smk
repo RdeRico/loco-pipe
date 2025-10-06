@@ -19,6 +19,7 @@ rule snp_calling_global:
         expand("{{basedir}}/angsd/snp_calling_global/{{chr}}.{ext}",
                ext = [ "arg", "beagle.gz", "covMat", "depthGlobal", "depthSample", "ibs.gz", "ibsMat", "mafs.gz", "pos.gz", "snp_list", "snp_list.idx", "snp_list.bin" ]),
         touch("{basedir}/angsd/snp_calling_global/{chr}.done")
+    resources: mem_mb=29920
     threads:
         config["get_depth_global"]["threads"]
     params:
@@ -32,7 +33,7 @@ rule snp_calling_global:
         pval = config["snp_calling_global"]["pval"],
         extra = config["snp_calling_global"]["extra"]
     log: "{basedir}/angsd/snp_calling_global/{chr}.log"
-    conda: "../envs/angsd.yaml"
+    conda: "angsd_lcpipe"
     shell:
         '''
         MINDP=`cat {input.depth_filter} | tail -n 1 | cut -f 1`

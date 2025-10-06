@@ -37,14 +37,8 @@ snp_position <- read_tsv(str_c(in_dir, "/", chrs, ".snp_position.tsv"), col_name
             center = (start+end)/2)
 ## Run lostruct
 dist <- pc_dist(pca_summary, mc.cores = threads)
-print("Distance matrix computed")
-cat("PCA summary matrix dimensions:", dim(pca_summary), "\n")
 ## Perform MDS with the resulting distance matrix
-mds <- try(cmdscale(as.dist(dist), k = k, eig = TRUE), silent = TRUE)
-if (inherits(mds, "try-error")) {
-  warning("MDS failed for a window, skipping.")
-  next
-}
+mds <- cmdscale(as.dist(dist), k=k, eig = T)
 proportion_variance <- round(mds$eig/sum(mds$eig)*100,2)
 mds_wide <- mds$points %>%
   as_tibble() %>%
@@ -75,11 +69,7 @@ for (chr in chrs){
   ## Run lostruct
   dist <- pc_dist(pca_summary, mc.cores = threads)
   ## Perform MDS with the resulting distance matrix
-  mds <- try(cmdscale(as.dist(dist), k = k, eig = TRUE), silent = TRUE)
-  if (inherits(mds, "try-error")) {
-    warning("MDS failed for a window, skipping.")
-    next
-  }
+  mds <- cmdscale(as.dist(dist), k=k, eig = T)
   proportion_variance <- round(mds$eig/sum(mds$eig)*100,2)
   mds_wide <- mds$points %>%
     as_tibble() %>%

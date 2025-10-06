@@ -7,7 +7,8 @@ rule get_ohana_input_global:
     input: "{basedir}/angsd/snp_calling_global/{file}.beagle"
     output: "{basedir}/ohana/global/{file}.lgm"
     params: outdir = "{basedir}/ohana/global"
-    conda: "../envs/ohana.yaml"
+    conda: "ohana_lcpipe"
+    resources: mem_mb=29800
     threads: 1
     shell:
         '''
@@ -27,9 +28,10 @@ rule run_ohana_global:
          q_mat = "{basedir}/ohana/global/{file}.k{k}.q.matrix",
          f_mat = "{basedir}/ohana/global/{file}.k{k}.f.matrix",
          done = touch("{basedir}/ohana/global/{file}.k{k}.done"),
+     resources: mem_mb=29800
      threads: 4
      log: "{basedir}/ohana/global/{file}.k{k}.log"
-     conda: "../envs/ohana.yaml"
+     conda: "ohana_lcpipe"
      shell:
          '''
          qpas {input} \
@@ -44,7 +46,7 @@ rule get_ohana_input_local:
     input: "{basedir}/angsd/get_maf/{population}.{file}.beagle"
     output: "{basedir}/ohana/local/{population}.{file}.lgm"
     params: outdir = "{basedir}/ohana/local"
-    conda: "../envs/ohana.yaml"
+    conda: "ohana_lcpipe"
     threads: 1
     shell:
         '''
@@ -58,9 +60,10 @@ rule run_ohana_local:
          q_mat = "{basedir}/ohana/local/{population}.{file}.k{k}.q.matrix",
          f_mat = "{basedir}/ohana/local/{population}.{file}.k{k}.f.matrix",
          done = touch("{basedir}/ohana/local/{population}.{file}.k{k}.done"),
+     resources: mem_mb=29800
      threads: 4
      log: "{basedir}/ohana/local/{population}.{file}.k{k}.log"
-     conda: "../envs/ohana.yaml"
+     conda: "ohana_lcpipe"
      shell:
          '''
          qpas {input} \
@@ -88,7 +91,7 @@ rule plot_ohana_admixture_global:
     threads: 1
     log: "{basedir}/ohana/global/{file}.plot.log"
     conda:
-        "../envs/r.yaml" 
+        "r_lcpipe" 
     shell:
         '''
         mkdir -p {params.outdir}
@@ -114,7 +117,7 @@ rule plot_ohana_admixture_local:
     threads: 1
     log: "{basedir}/ohana/local/{population}.{file}.plot.log"
     conda:
-        "../envs/r.yaml" 
+        "r_lcpipe" 
     shell:
         '''
         mkdir -p {params.outdir}

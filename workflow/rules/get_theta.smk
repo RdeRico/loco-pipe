@@ -10,6 +10,7 @@ rule get_theta:
         expand("{{basedir}}/angsd/get_theta/{{population}}.{{chr}}.{ext}",
                ext=[ "arg", "sfs", "thetas.idx", "thetas.gz", "thetas.tsv.gz", "saf.gz", "saf.idx", "saf.pos.gz", "average_thetas.pestPG" ]),
         done = touch("{basedir}/angsd/get_theta/{population}.{chr}.done"),
+    resources: mem_mb=29920
     threads:
         config["get_theta"]["threads"]
     params:
@@ -26,7 +27,7 @@ rule get_theta:
         dosaf_extra=config["get_theta"]["dosaf_extra"],
         realsfs_extra=config["get_theta"]["realsfs_extra"],
     log: "{basedir}/angsd/get_theta/{population}.{chr}.log"
-    conda: "../envs/angsd.yaml"
+    conda: "angsd_lcpipe"
     shell:
         '''
         mkdir -p {params.outdir}
@@ -97,7 +98,7 @@ rule plot_sfs_distribution:
     threads: 4
     log: "{basedir}/angsd/get_theta/sfs_distribution/{population}.plot_sfs_distribution.log"
     conda:
-        "../envs/r.yaml" 
+        "r_lcpipe" 
     shell:
         '''
         mkdir -p {params.outdir}
@@ -125,7 +126,7 @@ rule plot_theta_by_window:
     threads: 4
     log: "{basedir}/angsd/get_theta/{population}.plot_theta_by_window.log"
     conda:
-        "../envs/r.yaml" 
+        "r_lcpipe" 
     shell:
         '''
         mkdir -p {params.outdir}

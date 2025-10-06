@@ -8,6 +8,7 @@ rule run_pcangsd_pca_global:
     params:
         outdir = "{basedir}/pcangsd/global",
         minmaf=config["run_pcangsd_global"]["minmaf"],
+    resources: mem_mb=29920
     threads: config["run_pcangsd_global"]["threads"]
     log: "{basedir}/pcangsd/global/{file}.log"
     conda:
@@ -38,6 +39,7 @@ rule run_pcangsd_pca_local:
     params:
         outdir = "{basedir}/pcangsd/local",
         minmaf=config["run_pcangsd_local"]["minmaf"],
+    resources: mem_mb=29920
     threads: config["run_pcangsd_local"]["threads"]
     log: "{basedir}/pcangsd/local/{population}.{file}.log"
     conda:
@@ -72,7 +74,7 @@ rule plot_pcangsd_pca_global:
     threads: 1
     log: "{basedir}/pcangsd/global/{file}.plot.log"
     conda:
-        "../envs/r.yaml" 
+        "r_lcpipe" 
     shell:
         '''
         mkdir -p {params.outdir}
@@ -97,7 +99,7 @@ rule plot_pcangsd_pca_local:
     threads: 1
     log: "{basedir}/pcangsd/local/{population}.{file}.plot.log"
     conda:
-        "../envs/r.yaml" 
+        "r_lcpipe" 
     shell:
         '''
         mkdir -p {params.outdir}

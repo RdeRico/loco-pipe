@@ -70,7 +70,7 @@ mds_plot <- mds_long %>%
 ggsave(str_c(plot_dir, '/combined.mds.png'), mds_plot, width = fig_width, height = fig_height)
 ## Save MDS results
 mds_long %>%
-  write_csv(str_c(out_dir, "/combined.mds.csv"))
+  write_tsv(str_c(out_dir, "/combined.mds.tsv"))
 ## Save outlier windows
 mds_long %>%
   filter(outlier==TRUE) %>%
@@ -123,7 +123,7 @@ mds_plot <- mds_long %>%
 ggsave(str_c(plot_dir, '/separated.mds.png'), mds_plot, width = fig_width, height = fig_height, units = "in")
 ## Save MDS results
 mds_long %>%
-  write_csv(str_c(out_dir, "/separated.mds.csv"))
+  write_tsv(str_c(out_dir, "/separated.mds.tsv"))
 ## Save outlier windows
 mds_long %>%
   filter(outlier==TRUE, axis %in% str_c("mds_", 1:k)) %>%

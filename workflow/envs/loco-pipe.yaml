@@ -1,7 +1,7 @@
 name: loco-pipe
 channels:
-  - conda-forge
   - bioconda
+  - conda-forge
 dependencies:
   - snakemake==7.22.0
   - python==3.11.0

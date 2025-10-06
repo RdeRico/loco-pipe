@@ -23,11 +23,12 @@ rule get_heterozygosity:
         dosaf_extra = config["get_heterozygosity"]["dosaf_extra"],
         ref_type = config["global"]["ref_type"],
         realsfs_extra = config["get_heterozygosity"]["realsfs_extra"],
+    resources: mem_mb=80000
     threads: config["get_heterozygosity"]["threads"]
     log: 
         dosaf = "{basedir}/angsd/heterozygosity/dosaf_{id}.log",
         realsfs = "{basedir}/angsd/heterozygosity/realsfs_{id}.log"
-    conda: "../envs/angsd.yaml"
+    conda: "angsd_lcpipe"
     shell:
         '''
         mkdir -p {params.outdir}
@@ -67,7 +68,7 @@ rule plot_heterozygosity:
     threads: 1
     log: "{basedir}/angsd/heterozygosity/plot_heterozygosity.log"
     conda:
-        "../envs/r.yaml" 
+        "r_lcpipe" 
     shell:
         '''
         mkdir -p {params.outdir}

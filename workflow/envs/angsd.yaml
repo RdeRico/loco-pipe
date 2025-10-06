@@ -1,6 +1,6 @@
 name: angsd_lcpipe
 channels:
-  - conda-forge
   - bioconda
+  - conda-forge
 dependencies:
   - angsd==0.940

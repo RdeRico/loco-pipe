@@ -9,6 +9,7 @@ rule get_maf:
         expand("{{basedir}}/angsd/get_maf/{{population}}.{{chr}}.{ext}",
                ext=[ "arg", "beagle.gz", "covMat", "ibs.gz", "ibsMat", "mafs.gz", "pos.gz", "saf.gz", "saf.idx", "saf.pos.gz" ]),
         touch("{basedir}/angsd/get_maf/{population}.{chr}.done")
+    resources: mem_mb=14900
     threads:
         config["get_depth_global"]["threads"]
     params:
@@ -20,7 +21,7 @@ rule get_maf:
         minind=config["get_maf"]["minind"],
         mindepthind=config["get_maf"]["mindepthind"],
     log: "{basedir}/angsd/get_maf/{population}.{chr}.log"
-    conda: "../envs/angsd.yaml"
+    conda: "angsd_lcpipe"
     shell:
         '''
         mkdir -p {params.outdir}
