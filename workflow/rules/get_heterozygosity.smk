@@ -23,7 +23,7 @@ rule get_heterozygosity:
         dosaf_extra = config["get_heterozygosity"]["dosaf_extra"],
         ref_type = config["global"]["ref_type"],
         realsfs_extra = config["get_heterozygosity"]["realsfs_extra"],
-    resources: mem_mb=80000
+    resources: mem_mb=32000
     threads: config["get_heterozygosity"]["threads"]
     log: 
         dosaf = "{basedir}/angsd/heterozygosity/dosaf_{id}.log",
