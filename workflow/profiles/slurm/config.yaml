@@ -18,5 +18,4 @@ printshellcmds: True
 
 default-resources:
   - time="12:00:00"
-  - mem_mb=3740
   - tmpdir="angsd/snake-tmp"
