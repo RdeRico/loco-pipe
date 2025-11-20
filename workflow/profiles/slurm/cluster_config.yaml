@@ -9,7 +9,7 @@ get_heterozygosity:
   time: "72:00:00"
   nodes: 1
   cpus-per-task: 4
-  mem: "50G"
+  mem: "64G"
   partition: amilan
   qos: long
 
