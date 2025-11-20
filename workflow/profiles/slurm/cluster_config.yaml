@@ -10,7 +10,6 @@ get_heterozygosity:
   nodes: 1
   cpus-per-task: 4
   mem: "50G"
-  jobs: 10
   partition: amilan
   qos: long
 
