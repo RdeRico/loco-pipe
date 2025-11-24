@@ -10,7 +10,7 @@ get_heterozygosity:
   nodes: 1
   cpus-per-task: 32
   mem: "119"
-  partition: amilan128c,amilan
+  partition: amilan
   qos: normal
 
 run_lostruct_global:
