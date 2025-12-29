@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/mnt/netapp1/Store_CSIC/home/csic/eye/rrm/miniconda3/envs/loco-pipe/bin/python
 """
 Snakemake SLURM submit script.
 """
