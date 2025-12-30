@@ -17,7 +17,7 @@ rule get_depth_filter_global:
         n_sd = config["get_depth_filter_global"]["n_sd"],
         rscript = config["global"]["scriptdir"] + "/get_depth_filter.R"
     log: "{basedir}/angsd/get_depth_global/get_depth_filter.log"
-    conda: "../envs/r.yaml"
+    conda: "r_lcpipe"
     shell:
         '''
         mkdir -p {params.plot_dir}
