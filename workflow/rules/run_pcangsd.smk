@@ -21,8 +21,8 @@ rule run_pcangsd_pca_global:
         ## run pcangsd for PCA only (other options need to be added)
         pcangsd \
         --beagle {input} \
-        --snp_weights \
-        --sites_save \
+        --snp-weights \
+        --sites-save \
         --maf {params.minmaf} \
         --threads {threads} \
         --out {params.outdir}/{wildcards.file} \
